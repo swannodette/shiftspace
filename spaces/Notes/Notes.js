@@ -24,6 +24,8 @@ var NotesShift = new Class({
     this.noteText = (json.noteText && json.noteText.replace(/<br\/>/g, "\n")) || null;
 
     this.element = this.template("shift").toElement();
+    this.element.getElement("iframe").addEvent("load", this.finishFrame.bind(this));
+
     $(document.body).grab(this.element);
     this.initUI();
     this.attachEvents();
@@ -310,8 +312,6 @@ var NotesShift = new Class({
 
   hideEditInterface: function()
   {
-    this.saveButton.setStyle('display', 'none');
-    this.cancelButton.setStyle('display', 'none');
     this.pinWidgetDiv.setStyle('display', 'none');
     if(this.inputArea)
     {
@@ -328,9 +328,10 @@ var NotesShift = new Class({
   */
   finishFrame: function()
   {
+    console.log("finishFrame");
     // default
-    var text = 'Leave a note';
-    var props = this.getProperties();
+    var text = 'Leave a note',
+        props = this.getProperties();
 
     // if properties from borked json grab them
     if(props) this.noteText = props.noteText;
