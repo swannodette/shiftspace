@@ -480,7 +480,7 @@ var ShiftSpaceSpace = new Class({
         SSLog(exc);
       }
     }
-    if(cShift.canShow())
+    if(cShift && cShift.canShow())
     {
       if(this.getCurrentShift() && cShift != this.getCurrentShift()) this.getCurrentShift().onBlur();
       this.setCurrentShift(cShift);
@@ -496,6 +496,10 @@ var ShiftSpaceSpace = new Class({
       cShift.__showAfter__();
       this.onShiftShow(cShift.getId());
       cShift.onFocus();
+    }
+    else
+    {
+      // TODO: show error state - David 7/31/10
     }
   },
 

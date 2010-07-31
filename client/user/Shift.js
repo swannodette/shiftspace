@@ -63,7 +63,10 @@ var ShiftSpaceShift = new Class({
 
   attributes: function()
   {
-    return this.getParentSpace().attributes();
+    if(this.getParentSpace().attributes)
+    {
+      return this.getParentSpace().attributes();      
+    }
   },
   
   /*
